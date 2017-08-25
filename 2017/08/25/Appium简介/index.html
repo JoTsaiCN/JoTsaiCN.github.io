@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="自动化测试,iOS,Appium," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Appium 简介 Appium is an open-source tool for automating native, mobile web, and hybrid applications on iOS mobile, Android mobile, and Windows desktop platforms. Native apps are those written using the">
+<meta name="keywords" content="自动化测试,iOS,Appium">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Appium简介">
+<meta property="og:url" content="http://yoursite.com/2017/08/25/Appium简介/index.html">
+<meta property="og:site_name" content="Jo Tsai&#39;s blog">
+<meta property="og:description" content="Appium 简介 Appium is an open-source tool for automating native, mobile web, and hybrid applications on iOS mobile, Android mobile, and Windows desktop platforms. Native apps are those written using the">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://wx3.sinaimg.cn/large/73f872f5gy1fhny04nxunj20ll0ip0t7.jpg">
+<meta property="og:updated_time" content="2017-08-25T08:04:07.703Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Appium简介">
+<meta name="twitter:description" content="Appium 简介 Appium is an open-source tool for automating native, mobile web, and hybrid applications on iOS mobile, Android mobile, and Windows desktop platforms. Native apps are those written using the">
+<meta name="twitter:image" content="http://wx3.sinaimg.cn/large/73f872f5gy1fhny04nxunj20ll0ip0t7.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/25/Appium简介/"/>
+
+
+
+
+
+  <title>Appium简介 | Jo Tsai's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jo Tsai's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/25/Appium简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jo Tsai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jo Tsai's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Appium简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T16:02:38+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS自动化测试/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS自动化测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/25/Appium简介/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/25/Appium简介/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Appium-简介"><a href="#Appium-简介" class="headerlink" title="Appium 简介"></a>Appium 简介</h2><blockquote>
+<p>Appium is an open-source tool for automating native, mobile web, and hybrid applications on iOS mobile, Android mobile, and Windows desktop platforms. <strong>Native apps</strong> are those written using the iOS, Android, or Windows SDKs. <strong>Mobile web apps</strong>are web apps accessed using a mobile browser (Appium supports Safari on iOS and Chrome or the built-in ‘Browser’ app on Android). <strong>Hybrid apps</strong> have a wrapper around a “webview” – a native control that enables interaction with web content. Projects like <a href="http://phonegap.com/" target="_blank" rel="external">Phonegap</a>, make it easy to build apps using web technologies that are then bundled into a native wrapper, creating a hybrid app.</p>
+<p>Importantly, Appium is “cross-platform”: it allows you to write tests against multiple platforms (iOS, Android, Windows), using the same API. This enables code reuse between iOS, Android, and Windows testsuites.</p>
+</blockquote>
+<ul>
+<li>开源的自动化测试工具</li>
+<li>支持原生、移动 web 和混合应用</li>
+<li>跨平台，对 iOS、Android、Windows 进行自动化测试时使用相同的 API</li>
+</ul>
+<h2 id="Appium-的理念"><a href="#Appium-的理念" class="headerlink" title="Appium 的理念"></a>Appium 的理念</h2><blockquote>
+<p>Appium was designed to meet mobile automation needs according to a philosophy outlined by the following four tenets:</p>
+<ol>
+<li>You shouldn’t have to recompile your app or modify it in any way in order to automate it.</li>
+<li>You shouldn’t be locked into a specific language or framework to write and run your tests.</li>
+<li>A mobile automation framework shouldn’t reinvent the wheel when it comes to automation APIs.</li>
+<li>A mobile automation framework should be open source, in spirit and practice as well as in name!</li>
+</ol>
+</blockquote>
+<ol>
+<li>不需要为了自动化而重新编译或者修改应用</li>
+<li>不局限于某种语言或者框架来编写和运行测试脚本</li>
+<li>一个移动端自动化框架不应该在自动化接口上重复造轮子（移动自动化的接口应该统一）</li>
+<li>必须开源</li>
+</ol>
+<h2 id="Appium-的设计"><a href="#Appium-的设计" class="headerlink" title="Appium 的设计"></a>Appium 的设计</h2><ul>
+<li>为了实现上述4条理念，appium 设计如下</li>
+</ul>
+<ol>
+<li><p>在 appium 引擎下使用操作系统提供的自动化框架</p>
+<ul>
+<li>iOS 9.3 及以上: Apple’s <a href="https://developer.apple.com/reference/xctest" target="_blank" rel="external">XCUITest</a></li>
+<li>iOS 9.3 及以下: Apple’s <a href="https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/" target="_blank" rel="external">UIAutomation</a></li>
+<li>Android 4.2+: Google’s <a href="http://developer.android.com/tools/help/uiautomator/index.html" target="_blank" rel="external">UiAutomator</a></li>
+<li>Android 2.3+: Google’s <a href="http://developer.android.com/reference/android/app/Instrumentation.html" target="_blank" rel="external">Instrumentation</a>. (Instrumentation support is provided by bundling a separate project, <a href="http://selendroid.io/" target="_blank" rel="external">Selendroid</a>)</li>
+<li>Windows: Microsoft’s <a href="http://github.com/microsoft/winappdriver" target="_blank" rel="external">WinAppDriver</a></li>
+</ul>
+</li>
+<li><p>将上述自动化框架封装成一套 API：WebDriver API， WebDriver 指定了客户端-服务端协议（JSON Wire Protocol）。基于客户端-服务端的架构，我们可以使用任何编程语言来编写客户端，让客户端向服务端发送恰当的 HTTP 请求。以 iOS 为例，appium 的架构如下图所示。目前 appium 已经实现了大多数流行语言版本的客户端，这意味着我们可以使用任何测试套件或者测试框架</p>
+<p><img src="http://wx3.sinaimg.cn/large/73f872f5gy1fhny04nxunj20ll0ip0t7.jpg" alt="image"></p>
+</li>
+<li><p>在第 2 点的基础上，扩充 WebDriver 的协议，实现了Mobile JSON Wire Protocol，在 JSON Wire Protocol 的基础上添加移动自动化相关的 API 方法</p>
+</li>
+<li><p><a href="https://github.com/appium" target="_blank" rel="external">Appium 的 github</a></p>
+</li>
+</ol>
+<h2 id="Appium-的概念"><a href="#Appium-的概念" class="headerlink" title="Appium 的概念"></a>Appium 的概念</h2><p><strong>C/S 架构</strong></p>
+<p>​    Appium 的核心是一个 web 服务器，它提供了一套 REST 的接口。它收到客户端的连接，监听到命令，接着在移动设备上执行这些命令，然后将执行结果放在 HTTP 响应中返还给客户端。事实上，这种客户端/服务端的架构给予了许多的可能性：比如我们可以使用任何实现了该客户端的语言来写我们的测试代码。比如我们可以把服务端放在不同 的机器上。比如我们可以只写测试代码，然后使用像 <a href="https://saucelabs.com/mobile" target="_blank" rel="external">Sauce Labs</a> 这样的云服务来解释命令。</p>
+<p><strong>Appium 服务端</strong></p>
+<p>​    Appium server 是用 Node.js 写的。我们可以用源码编译或者从 NPM 直接安装。</p>
+<p><strong>Appium 客户端</strong></p>
+<p>​    Appium 服务端有很多语言库 Java, Ruby, Python, PHP, JavaScript 和 C#，这些库都实现了 Appium 对 WebDriver 协议的扩展。当使用 Appium 的时候，你只需使用这些库代替常规的 WebDriver 库就可以了。 以下是目前的客户端类库列表以及对应的项目开源地址，可以访问<a href="https://github.com/appium/appium/blob/master/docs/en/about-appium/appium-clients.md" target="_blank" rel="external">网址</a>查看所有的库的列表。</p>
+<table>
+<thead>
+<tr>
+<th>语言/框架</th>
+<th>Github版本库以及安装指南</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ruby</td>
+<td><a href="https://github.com/appium/ruby_lib" target="_blank" rel="external">https://github.com/appium/ruby_lib</a></td>
+</tr>
+<tr>
+<td>Python</td>
+<td><a href="https://github.com/appium/python-client" target="_blank" rel="external">https://github.com/appium/python-client</a></td>
+</tr>
+<tr>
+<td>Java</td>
+<td><a href="https://github.com/appium/java-client" target="_blank" rel="external">https://github.com/appium/java-client</a></td>
+</tr>
+<tr>
+<td>JavaScript (Node.js)</td>
+<td><a href="https://github.com/admc/wd" target="_blank" rel="external">https://github.com/admc/wd</a></td>
+</tr>
+<tr>
+<td>Objective C</td>
+<td><a href="https://github.com/appium/selenium-objective-c" target="_blank" rel="external">https://github.com/appium/selenium-objective-c</a></td>
+</tr>
+<tr>
+<td>PHP</td>
+<td><a href="https://github.com/appium/php-client" target="_blank" rel="external">https://github.com/appium/php-client</a></td>
+</tr>
+<tr>
+<td>C# (.NET)</td>
+<td><a href="https://github.com/appium/appium-dotnet-driver" target="_blank" rel="external">https://github.com/appium/appium-dotnet-driver</a></td>
+</tr>
+<tr>
+<td>RobotFramework</td>
+<td><a href="https://github.com/jollychang/robotframework-appiumlibrary" target="_blank" rel="external">https://github.com/jollychang/robotframework-appiumlibrary</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Session（会话）</strong></p>
+<p>​    自动化始终围绕一个 session 进行，客户端初始化一个 seesion（会话）来与服务端交互，发送一个 POST 请求给服务端，请求中包含一个 JSON 对象，被称作“desired capabilities”，服务端会根据 desired capabilities 开启一个自动化的 session，然后返回一个 session ID，客户端使用这个 session ID 发送后续的命令。</p>
+<p><strong>Desired Capabilities：会话初始化参数</strong></p>
+<p>​    Desired capabilities 是一些键值对 (key-value) 的集合，客户端在发起一个会话的时候将这些键值对发给服务端，告诉服务端我们想要怎么测试。比如如下所示的 Desired capabilities，表示测试的设备是系统为<code>iOS</code>、系统版本为<code>10.3</code>、设备名为<code>iPhone SE</code>的模拟器，测试 app 的 bundleId 为<code>com.apple.mobilesafari</code>，也就是系统自带的 safari 浏览器。访问 <a href="https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/caps.md" target="_blank" rel="external">capabilities文档</a> 查看完整的 capabilities 列表。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"platformName"</span>: <span class="string">"iOS"</span>,</div><div class="line">  <span class="attr">"platformVersion"</span>: <span class="string">"10.3"</span>,</div><div class="line">  <span class="attr">"deviceName"</span>: <span class="string">"iPhone SE"</span>,</div><div class="line">  <span class="attr">"bundleId"</span>: <span class="string">"com.apple.mobilesafari"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>Appium 服务端的桌面版：appium-desktop.dmg, appium-desktop.exe</strong></p>
+<p>​    Appium提供了 GUI 封装的 Appium 服务端下载，它封装了运行 Appium 服务端的所有依赖，而不需要担心怎样安装 Node.js。其中还包括一个 Inspector 工具，可以帮助你检查应用的界面层级，这样写测试用例时更方便。</p>
+<h2 id="WebDriverAgent-介绍"><a href="#WebDriverAgent-介绍" class="headerlink" title="WebDriverAgent 介绍"></a>WebDriverAgent 介绍</h2><blockquote>
+<p>WebDriverAgent is a <a href="https://w3c.github.io/webdriver/webdriver-spec.html" target="_blank" rel="external">WebDriver server</a> implementation for iOS that can be used to remote control iOS devices. It allows you to launch &amp; kill applications, tap &amp; scroll views or confirm view presence on a screen. This makes it a perfect tool for application end-to-end testing or general purpose device automation. It works by linking <code>XCTest.framework</code> and calling Apple’s API to execute commands directly on a device. WebDriverAgent is developed and used at Facebook for end-to-end testing and is successfully adopted by <a href="http://appium.io/" target="_blank" rel="external">Appium</a>.</p>
+</blockquote>
+<p>​    WebDriverAgent 是 Facebook 的一个开源项目，它在 iOS 端实现了一个 WebDriver server，借助这个 server 我们可以远程控制 iOS 设备，可以进行启动和终止 app、点击、滚动屏幕、确认显示内容是否正确等操作。WebDriverAgent 通过链接<code>XCTest.framework</code>调用 Apple 的 API 直接在设备上执行命令。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自动化测试/" rel="tag"># 自动化测试</a>
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/Appium/" rel="tag"># Appium</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/25/在Windows上使用VMware安装MacOS虚拟机/" rel="next" title="在Windows上使用VMware安装MacOS虚拟机">
+                <i class="fa fa-chevron-left"></i> 在Windows上使用VMware安装MacOS虚拟机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/25/在MacOS上搭建Appium的iOS测试环境/" rel="prev" title="在MacOS上搭建Appium的iOS测试环境">
+                在MacOS上搭建Appium的iOS测试环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Jo Tsai" />
+          <p class="site-author-name" itemprop="name">Jo Tsai</p>
+           
+              <p class="site-description motion-element" itemprop="description">This guy is lazy, left nothing at all.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JoTsaiCN" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Appium-简介"><span class="nav-number">1.</span> <span class="nav-text">Appium 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appium-的理念"><span class="nav-number">2.</span> <span class="nav-text">Appium 的理念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appium-的设计"><span class="nav-number">3.</span> <span class="nav-text">Appium 的设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appium-的概念"><span class="nav-number">4.</span> <span class="nav-text">Appium 的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebDriverAgent-介绍"><span class="nav-number">5.</span> <span class="nav-text">WebDriverAgent 介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jo Tsai</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://jotsai.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/08/25/Appium简介/';
+          this.page.identifier = '2017/08/25/Appium简介/';
+          this.page.title = 'Appium简介';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jotsai.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
