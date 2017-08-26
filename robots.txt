@@ -10,5 +10,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: https://JoTsaiCN.github.io/sitemap.xml
-Sitemap: https://JoTsaiCN.github.io/baidusitemap.xml
+Sitemap: https://jotsaicn.github.io/sitemap.xml
+Sitemap: https://jotsaicn.github.io/baidusitemap.xml
