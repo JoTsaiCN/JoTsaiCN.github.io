@@ -21,9 +21,9 @@
         <category>自动化测试</category>
       </categories>
       <tags>
-        <tag>macOS</tag>
         <tag>Appium</tag>
         <tag>iOS</tag>
+        <tag>macOS</tag>
       </tags>
   </entry>
   <entry>
@@ -46,8 +46,8 @@
         <category>自动化测试</category>
       </categories>
       <tags>
-        <tag>VMware</tag>
         <tag>macOS</tag>
+        <tag>VMware</tag>
       </tags>
   </entry>
 </search>

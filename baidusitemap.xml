@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+    
+  <url>
+    <loc>https://JoTsaiCN.github.io/2017/08/26/%E4%BD%BF%E7%94%A8Appium%E6%B5%8B%E8%AF%95iOS%E5%BA%94%E7%94%A8-Python/</loc>
+    <lastmod>2017-08-26T06:49:23.100Z</lastmod>
+    <data>
+        <display>
+        <title>使用Appium测试iOS应用(Python)</title>
+        <pubTime>2017-08-26T06:36:55.000Z</pubTime>
+        
+        <tag>Appium</tag>
+         
+        <tag>iOS</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="自动化测试" url="https://JoTsaiCN.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://JoTsaiCN.github.io/2017/08/26/%E5%9C%A8MacOS%E4%B8%8A%E6%90%AD%E5%BB%BAAppium%E7%9A%84iOS%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2017-08-26T06:48:31.098Z</lastmod>
+    <data>
+        <display>
+        <title>在MacOS上搭建Appium的iOS测试环境</title>
+        <pubTime>2017-08-26T06:21:07.000Z</pubTime>
+        
+        <tag>Appium</tag>
+         
+        <tag>iOS</tag>
+         
+        <tag>macOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="自动化测试" url="https://JoTsaiCN.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://JoTsaiCN.github.io/2017/08/26/%E5%9C%A8Windows%E4%B8%8A%E4%BD%BF%E7%94%A8VMware%E5%AE%89%E8%A3%85MacOS%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
+    <lastmod>2017-08-26T06:38:24.912Z</lastmod>
+    <data>
+        <display>
+        <title>在Windows上使用VMware安装MacOS虚拟机</title>
+        <pubTime>2017-08-26T05:33:49.000Z</pubTime>
+        
+        <tag>macOS</tag>
+         
+        <tag>VMware</tag>
+         
+         
+           
+             
+              <breadCrumb title="自动化测试" url="https://JoTsaiCN.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://JoTsaiCN.github.io/2017/08/26/Appium%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2017-08-26T06:24:49.505Z</lastmod>
+    <data>
+        <display>
+        <title>Appium简介</title>
+        <pubTime>2017-08-26T05:55:15.000Z</pubTime>
+        
+        <tag>Appium</tag>
+         
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="自动化测试" url="https://JoTsaiCN.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>
