@@ -4,7 +4,7 @@
 
 # Site
 title: Jo Tsai's blog
-subtitle:
+subtitle: Automate UI tests with appium
 signature: This guy is lazy, nothing left.
 description: 
 author: Jo Tsai
@@ -13,7 +13,7 @@ timezone: Asia/Hong_Kong
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://JoTsaiCN.github.io
+url: https://jotsaicn.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
