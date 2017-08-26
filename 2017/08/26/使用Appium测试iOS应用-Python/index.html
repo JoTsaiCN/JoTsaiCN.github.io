@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Appium,iOS,Python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="环境要求 macOS 12 iOS 10 Appium 的 iOS 环境搭建完毕">
+<meta name="keywords" content="Appium,iOS,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Appium测试iOS应用(Python)">
+<meta property="og:url" content="https://JoTsaiCN.github.io/2017/08/26/使用Appium测试iOS应用-Python/index.html">
+<meta property="og:site_name" content="Jo Tsai&#39;s blog">
+<meta property="og:description" content="环境要求 macOS 12 iOS 10 Appium 的 iOS 环境搭建完毕">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ws3.sinaimg.cn/large/73f872f5gy1fhoewa57d9j20eb01dglj.jpg">
+<meta property="og:updated_time" content="2017-08-26T06:49:23.100Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Appium测试iOS应用(Python)">
+<meta name="twitter:description" content="环境要求 macOS 12 iOS 10 Appium 的 iOS 环境搭建完毕">
+<meta name="twitter:image" content="http://ws3.sinaimg.cn/large/73f872f5gy1fhoewa57d9j20eb01dglj.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://JoTsaiCN.github.io/2017/08/26/使用Appium测试iOS应用-Python/"/>
+
+
+
+
+
+  <title>使用Appium测试iOS应用(Python) | Jo Tsai's blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-105301787-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jo Tsai's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://JoTsaiCN.github.io/2017/08/26/使用Appium测试iOS应用-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jo Tsai">
+      <meta itemprop="description" content="This guy is lazy, nothing left.">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jo Tsai's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">使用Appium测试iOS应用(Python)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-26T14:36:55+08:00">
+                2017-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自动化测试/" itemprop="url" rel="index">
+                    <span itemprop="name">自动化测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/26/使用Appium测试iOS应用-Python/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/26/使用Appium测试iOS应用-Python/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><ul>
+<li>macOS 12</li>
+<li>iOS 10</li>
+<li>Appium 的 iOS 环境搭建完毕</li>
+</ul>
+<a id="more"></a>
+<h2 id="安装-Appium-的-python-客户端库"><a href="#安装-Appium-的-python-客户端库" class="headerlink" title="安装 Appium 的 python 客户端库"></a>安装 Appium 的 python 客户端库</h2><ol>
+<li><p>安装 python</p>
+<ul>
+<li><p>下载安装包安装 <a href="https://www.python.org/downloads/mac-osx/" target="_blank" rel="external">下载地址</a></p>
+</li>
+<li><p>通过 brew 安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install python3</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>安装 Appium 的 python 客户端库</p>
+<ul>
+<li><p>使用 pip 安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip3 install Appium-Python-Client</div></pre></td></tr></table></figure>
+</li>
+<li><p>通过编译源码安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:appium/python-client.git</div><div class="line">cd python-client</div><div class="line">python3 setup.py install</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="启动-Appium-Server"><a href="#启动-Appium-Server" class="headerlink" title="启动 Appium Server"></a>启动 Appium Server</h2><ul>
+<li><p>Appium 桌面版本：运行 Appium desktop，点击 <code>Start Server</code> 按钮</p>
+</li>
+<li><p>Appium 命令行版本：在终端中执行以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">appium</div></pre></td></tr></table></figure>
+<p><img src="http://ws3.sinaimg.cn/large/73f872f5gy1fhoewa57d9j20eb01dglj.jpg" alt="image"></p>
+</li>
+</ul>
+<h2 id="启动-Session"><a href="#启动-Session" class="headerlink" title="启动 Session"></a>启动 Session</h2><h3 id="指定测试应用"><a href="#指定测试应用" class="headerlink" title="指定测试应用"></a>指定测试应用</h3><ul>
+<li>有三种方式指定测试应用，此时默认上下文为 <code>native</code> 类型<ul>
+<li>desired_capabilities 指定 <code>app</code> 关键字为 <code>.ipa</code> 文件或 <code>.app</code> 文件的本地路径</li>
+<li>desired_capabilities 指定 <code>app</code> 关键字为 <code>.ipa</code> 文件或 <code>.app</code> 文件的 <code>HTTP</code> 地址</li>
+<li>desired_capabilities 指定 <code>bundleId</code> 关键字为应用的 <code>Bundle Identifier</code>，这种方式要求应用在创建 session 前已安装在设备上</li>
+</ul>
+</li>
+<li>使用以下方式指定测试 web 时要启动的浏览器，此时默认上下文为 <code>webview</code> 类型<ul>
+<li>desired_capabilities 指定 <code>browserName</code> 关键字为浏览器名称，指定 <code>startIWDP</code> 关键字为 True</li>
+</ul>
+</li>
+</ul>
+<h3 id="重置策略"><a href="#重置策略" class="headerlink" title="重置策略"></a>重置策略</h3><ul>
+<li>desired_capabilities 指定 <code>fullReset</code> 关键字或 <code>noReset</code> 关键字的值为 <code>true</code> 来设置重置策略</li>
+</ul>
+<ul>
+<li><code>fullReset</code> 和 <code>noReset</code> 默认为 <code>false</code>，此时采用 <code>默认重置策略</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>默认</th>
+<th>fullReset</th>
+<th>noReset</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iOS</td>
+<td>真机测试前卸载已安装的 app。不重启模拟器。</td>
+<td>真机测试前卸载已安装的 app。模拟器测试前会重启模拟器。</td>
+<td>真机测试前不卸载已安装的 app。不重启模拟器。</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># fullReset</span></div><div class="line">desired_capabilities=&#123;</div><div class="line">    <span class="string">'……省略……'</span>: <span class="string">'……省略……'</span>,</div><div class="line">    <span class="string">'fullReset'</span>: <span class="keyword">True</span></div><div class="line">&#125;</div><div class="line"><span class="comment"># noReset</span></div><div class="line">desired_capabilities=&#123;</div><div class="line">    <span class="string">'……省略……'</span>: <span class="string">'……省略……'</span>,</div><div class="line">    <span class="string">'noReset'</span>: <span class="keyword">True</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="创建和结束-Session"><a href="#创建和结束-Session" class="headerlink" title="创建和结束 Session"></a>创建和结束 Session</h3><ul>
+<li><p>创建 session <code>webdriver.Remote(command_executor, desired_capabilities)</code></p>
+</li>
+<li><p>结束 session <code>WebDriver.quit()</code></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> appium <span class="keyword">import</span> webdriver</div><div class="line">driver = webdriver.Remote(</div><div class="line">    command_executor=<span class="string">'http://0.0.0.0:4723/wd/hub'</span>,</div><div class="line">    desired_capabilities=&#123;</div><div class="line">        <span class="string">'platformName'</span>: <span class="string">'iOS'</span>,</div><div class="line">        <span class="string">'platformVersion'</span>: <span class="string">'10.1.1'</span>,</div><div class="line">        <span class="string">'deviceName'</span>: <span class="string">'iPhone6'</span>,</div><div class="line">        <span class="string">'udid'</span>: <span class="string">'设备udid'</span>,</div><div class="line">        <span class="string">'app'</span>: <span class="string">'app路径'</span>            </div><div class="line">    &#125;</div><div class="line">)</div><div class="line">driver.quit()</div></pre></td></tr></table></figure>
+<ul>
+<li><p>参数</p>
+<ul>
+<li>command_executor: 字符串类型，appium server 监听的地址</li>
+<li>desired_capabilities: 字典类型，启动 session 的参数</li>
+</ul>
+</li>
+<li><p>说明</p>
+<ul>
+<li><code>webdriver.Remote</code> 返回一个 <code>appium.webdriver.webdriver.WebDriver</code> 对象</li>
+<li><code>WebDriver.quit</code> 返回 <code>None</code></li>
+<li>如果无法创建或结束 session，会抛出 <code>WebDriverException</code> 异常</li>
+</ul>
+</li>
+</ul>
+<h2 id="设备操作"><a href="#设备操作" class="headerlink" title="设备操作"></a>设备操作</h2><h3 id="重启-session"><a href="#重启-session" class="headerlink" title="重启 session"></a>重启 session</h3><p>WebDriver.reset()  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.reset()</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>返回 WebDriver 对象</li>
+</ul>
+<h3 id="app-操作"><a href="#app-操作" class="headerlink" title="app 操作"></a>app 操作</h3><ul>
+<li><p>卸载 <code>WebDriver.remove_app(app_id)</code></p>
+</li>
+<li><p>安装 <code>WebDriver.install_app(app_path)</code></p>
+</li>
+<li><p>启动 <code>WebDriver.launch_app()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">driver.remove_app(<span class="string">'com.GuangZhouXuanWu.iphoneEtion'</span>)</div><div class="line">driver.install_app(<span class="string">'app_path'</span>)</div><div class="line">driver.launch_app()</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>app_id: app 的 bundleId</li>
+<li>app_path: app 安装包文件路径</li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li><p>返回 WebDriver 对象</p>
+</li>
+<li><p>launch_app 启动的是 app 关键字指定的应用，所以不需要参数</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="上下文操作"><a href="#上下文操作" class="headerlink" title="上下文操作"></a>上下文操作</h3><ul>
+<li><p>获取上下文 <code>WebDriver.contexts</code>  <code>WebDriver.context</code>  <code>WebDriver.current_context</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">driver_contexts = driver.contexts</div><div class="line">driver_context = driver.context</div><div class="line">driver_current_context = driver.current_context</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>WebDriver.context 返回一个字符串，为当前上下文名称</li>
+<li>WebDriver.contexts 返回一个包含当前会话所有上下文名称的 list</li>
+<li>WebDriver.current_context 等价于 WebDriver.context</li>
+</ul>
+</li>
+<li><p>切换上下文 <code>WebDriver.switch_to.context(context_name)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">driver.switch_to.context(<span class="string">'WEBVIEW_1'</span>)</div><div class="line"><span class="comment"># 切换到 webview 类型的上下文后，使用 web 自动化 API</span></div><div class="line">driver.get(<span class="string">'http://www.baidu.com'</span>)</div><div class="line">web_element = driver.find_element(MobileBy.CSS_SELECTOR, <span class="string">'button.se-bn'</span>)</div><div class="line">driver.switch_to.context(<span class="string">'NATIVE_APP'</span>)</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>返回 <code>None</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="获取-UI-布局"><a href="#获取-UI-布局" class="headerlink" title="获取 UI 布局"></a>获取 UI 布局</h3><p>WebDriver.page_source</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver_page_source = driver.page_source</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>当前上下文为 native 时，返回一个 xml 格式的字符串</li>
+<li>当前上下文为 webview 时，返回一个 html 格式的字符串</li>
+</ul>
+<h3 id="获取分辨率"><a href="#获取分辨率" class="headerlink" title="获取分辨率"></a>获取分辨率</h3><p>WebDriver.get_window_size()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver_size = driver.get_window_size()</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>返回一个字典</li>
+<li>返回逻辑分辨率</li>
+<li>关于 iPhone 的分辨率可参考该网址 <a href="https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions" target="_blank" rel="external">ultimate-guide-to-iphone-resolutions</a></li>
+</ul>
+<h3 id="屏幕截图"><a href="#屏幕截图" class="headerlink" title="屏幕截图"></a>屏幕截图</h3><ul>
+<li><p>返回二进制数据 <code>WebDriver.get_screenshot_as_png()</code></p>
+</li>
+<li><p>返回一个字符串 <code>WebDriver.get_screenshot_as_base64()</code></p>
+</li>
+<li><p>保存到文件中 <code>WebDriver.get_screenshot_as_file(filename)</code></p>
+</li>
+<li><p>保存到文件中 <code>WebDriver.save_screenshot(filename)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># bytes</span></div><div class="line">image_bytes = driver.get_screenshot_as_png()</div><div class="line"><span class="comment"># base64</span></div><div class="line">image_base64 = driver.get_screenshot_as_base64()</div><div class="line">html_str = <span class="string">'&lt;html&gt;&lt;body&gt;&lt;img src="data:image/png;base64, %s"/&gt;&lt;/body&gt;&lt;/html&gt;'</span> % image_base64</div><div class="line">html_file = open(<span class="string">'./image.html'</span>, <span class="string">'w'</span>)</div><div class="line">html_file.write(html_str)</div><div class="line">html_file.close()</div><div class="line"><span class="comment"># file</span></div><div class="line">driver.get_screenshot_as_file(<span class="string">'./save_image.png'</span>)</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>filename: 字符串类型，指定保存路径</li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li>返回的截图分辨率大小为渲染分辨率</li>
+<li>get_screenshot_as_png 返回 bytes 类型</li>
+<li>get_screenshot_as_base64 返回字符串类型，适用于将图片嵌入到 HTML 中</li>
+<li>get_screenshot_as_file 成功时返回 <code>True</code>，失败返回 <code>False</code></li>
+<li>save_screenshot 与 get_screenshot_as_file 等价</li>
+</ul>
+</li>
+</ul>
+<h3 id="弹窗操作"><a href="#弹窗操作" class="headerlink" title="弹窗操作"></a>弹窗操作</h3><ul>
+<li><p>接受弹窗 <code>WebDriver.switch_to.alert.accept()</code></p>
+</li>
+<li><p>拒绝弹窗 <code>WebDriver.switch_to.alert.dismiss()</code></p>
+</li>
+<li><p>获取文本 <code>WebDriver.switch_to.alert.text</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">driver.switch_to.alert.accept()</div><div class="line">driver.switch_to.alert.dismiss()</div><div class="line">alert_text = WebDriver.switch_to.alert.text</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>返回 <code>None</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="屏幕操作"><a href="#屏幕操作" class="headerlink" title="屏幕操作"></a>屏幕操作</h3><ul>
+<li><p>点击 <code>WebDriver.tap(positions, duration)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">driver.tap([(<span class="number">200</span>, <span class="number">300</span>)], <span class="number">200</span>)</div><div class="line"><span class="comment"># 暂时不支持多点触碰</span></div><div class="line">driver.tap([(<span class="number">50</span>, <span class="number">50</span>), (<span class="number">150</span>, <span class="number">150</span>)], <span class="number">200</span>)</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>positions: 类型为 list，列出所有点击坐标，点击坐标格式为 <code>(x, y)</code></li>
+<li>duration: 点击的时长，单位为 ms，默认为 <code>None</code></li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li>返回 WebDriver 对象</li>
+<li>最多可以有 5 个点击坐标，对应最多 5 个手指的多点触碰</li>
+</ul>
+</li>
+<li><p>滚动 <code>WebDriver.scroll(origin_el, destination_el)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">destination_el = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'列表-cell-农夫山泉'</span>)</div><div class="line">driver.scroll(<span class="keyword">None</span>, destination_el)</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>origin_el: WebElement 对象，表示滚动的起始位置</li>
+<li>destination_el: WebElement 对象，表示滚动的结束位置</li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li>返回 WebDriver 对象</li>
+<li>scroll 方法为滚动界面直到 destination_el 元素显示在屏幕上，因此 origin_el 参数没有意义，传 None 即可</li>
+</ul>
+</li>
+<li><p>划动 <code>WebDriver.swipe(start_x, start_y, end_x, end_y, duration)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.swipe(<span class="number">200</span>, <span class="number">400</span>, <span class="number">0</span>, <span class="number">-100</span>, <span class="number">100</span>)</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>start_x: 起始位置的 x 轴坐标</li>
+<li>start_y: 起始位置的 y 轴坐标</li>
+<li>end_x: x 轴偏移量</li>
+<li>end_y: y 轴偏移量</li>
+<li>duration: 点击起始位置和开始划动的间隔时间，默认为 <code>None</code></li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li>返回 WebDriver 对象</li>
+</ul>
+</li>
+</ul>
+<h3 id="执行指令"><a href="#执行指令" class="headerlink" title="执行指令"></a>执行指令</h3><p>WebDriver.execute_script(script, *args)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">destination_el = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'列表-cell-农夫山泉'</span>)</div><div class="line">driver.execute_script(<span class="string">'mobile: scroll'</span>, &#123;<span class="string">'element'</span>: destination_el, <span class="string">'toVisible'</span>: <span class="keyword">True</span>&#125;)</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>script: 执行的指令</li>
+<li>args: 指令的参数</li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li><p>在 native 类型的上下文中使用 <code>mobile: 指令</code> 指定要执行的操作，详细说明查看 <a href="">XCTest 手势操作</a></p>
+</li>
+<li><p>在 webview 类型的上下文中与 web 自动化的用法一样</p>
+</li>
+</ul>
+<h3 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h3><p>WebDriver.background_app(seconds)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.background_app(<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>seconds: 后台运行的时长，单位为秒</li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li>将 app 后台运行指定时长后，再将 app 前台运行</li>
+<li>返回 WebDriver 对象</li>
+</ul>
+<h3 id="获取设备时间"><a href="#获取设备时间" class="headerlink" title="获取设备时间"></a>获取设备时间</h3><p>WebDriver.device_time</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> datetime</div><div class="line">device_time_str = driver.device_time</div><div class="line">device_time = datetime.datetime.strptime(device_time_str[:<span class="number">-6</span>], <span class="string">'%a %b %d %Y %H:%M:%S %Z%z'</span>)</div><div class="line">device_time = device_time - datetime.timedelta(hour=<span class="number">14</span>)</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>返回字符串</li>
+<li>通过执行 idevicedate 命令来获取设备时间</li>
+<li>这里存在一个问题，idevicedate 返回的时间为 <code>Fri Aug  4 15:29:15 CST 2017</code>，CST 可以代表 4 个时区，在这里表示 <code>中国标准时间</code>，但 appium 将 CST 当成 <code>美国中部标准时间</code>，因此返回的时间比实际快 14 个小时</li>
+</ul>
+<h3 id="获取本地化字符串"><a href="#获取本地化字符串" class="headerlink" title="获取本地化字符串"></a>获取本地化字符串</h3><p>WebDriver.app_strings(language, string_file)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">device_app_strings = driver.app_strings(language=<span class="string">'zh-Hans'</span>)</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>language: 指定要获取哪一种语言的本地化文件</li>
+<li>string_file: 指定本地化文件的文件名</li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li>返回一个字典</li>
+<li>需要在 desired_capabilities 中指定 app 关键字</li>
+<li>实际上是通过解压本地的 app 包来获取 [language].lproj 文件夹（比如 zh-Hans.lproj）下的 [string_file] 文件（默认为 Localizable.strings），所以调用该方法的时候需要注意 iOS 上安装的包是否与 app 关键字指定的安装包一致</li>
+</ul>
+<h2 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h2><h3 id="查找单个元素"><a href="#查找单个元素" class="headerlink" title="查找单个元素"></a>查找单个元素</h3><p> WebDriver.find_element(by, value) </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> appium.webdriver.common.mobileby <span class="keyword">import</span> MobileBy </div><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'登录'</span>)</div></pre></td></tr></table></figure>
+<h3 id="查找多个元素"><a href="#查找多个元素" class="headerlink" title="查找多个元素"></a>查找多个元素</h3><p> WebDriver.find_elements(by, value)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> appium.webdriver.common.mobileby <span class="keyword">import</span> MobileBy </div><div class="line">elements = driver.find_elements(MobileBy.ACCESSIBILITY_ID, <span class="string">'登录'</span>)</div></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>by: 定位策略</li>
+<li>value: 定位策略的参数</li>
+</ul>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
+<li><code>find_element</code> 返回一个 <code>WebElement</code> 对象，对应找到的第一个元素，<code>find_elements</code> 返回一个 <code>list</code> ，包含找到的所有元素的</li>
+<li>如果找不到元素，<code>find_element</code> 会抛出 <code>NoSuchElementException</code> 异常，<code>find_elements</code> 会返回一个空列表</li>
+</ul>
+<ul>
+<li><p>WebDriver.find_element(By.XXX, value) 等价于 WebDriver.find_element_by_xxx(value)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element_by_accessibility_id(<span class="string">'登录'</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><p>WebDriver.find_elements(By.XXX, value) 等价于 WebDriver.find_elements_by_xxx(value)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">elements = driver.find_elements_by_accessibility_id(<span class="string">'登录'</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="定位策略"><a href="#定位策略" class="headerlink" title="定位策略"></a>定位策略</h3><p>Appium 支持<strong>部分 </strong>WebDriver 定位策略</p>
+<h4 id="class-name"><a href="#class-name" class="headerlink" title="class name"></a>class name</h4><p>按 UI 元素类型查找</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.CLASS_NAME, <span class="string">'XCUIElementTypeButton'</span>)</div></pre></td></tr></table></figure>
+<h4 id="xpath"><a href="#xpath" class="headerlink" title="xpath"></a>xpath</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.XPATH, <span class="string">'//XCUIElementTypeApplication[@name="玄讯快销100"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeButton[1]'</span>)</div></pre></td></tr></table></figure>
+<h4 id="id"><a href="#id" class="headerlink" title="id"></a>id</h4><p>在 iOS 设备上与 <code>accessibility id</code> 等价</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.ID, <span class="string">'登录'</span>)</div></pre></td></tr></table></figure>
+<h4 id="name"><a href="#name" class="headerlink" title="name"></a>name</h4><p>在 iOS 设备上与 <code>accessibility id</code> 等价</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.NAME, <span class="string">'登录'</span>)</div></pre></td></tr></table></figure>
+<p>Appium还添加了对 <a href="https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md" target="_blank" rel="external">Mobile JSON 连接协议</a> <strong>部分</strong>定位策略的支持</p>
+<h4 id="accessibility-id"><a href="#accessibility-id" class="headerlink" title="accessibility id"></a>accessibility id</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'登录'</span>)</div></pre></td></tr></table></figure>
+<h4 id="ios-predicate"><a href="#ios-predicate" class="headerlink" title="ios predicate"></a>ios predicate</h4><p>限 iOS，通过使用多个属性匹配条件来定位元素，常见属性有 type, value, name, label, enabled, visible </p>
+<h5 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h5><p>==, &gt;=, &lt;= , >, &lt;, !=, BETWEEN {n, m}, IN {s1, s2, s3}</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.IOS_PREDICATE, <span class="string">'type == "XCUIElementTypeButton"'</span>)</div><div class="line">element = driver.find_element(MobileBy.IOS_PREDICATE, <span class="string">'value BETWEEN &#123;10, 20&#125;'</span>)</div><div class="line">element = driver.find_element(MobileBy.IOS_PREDICATE, <span class="string">'name IN &#123;"登录", "用户名", "密码"&#125;'</span>)</div></pre></td></tr></table></figure>
+<h5 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h5><p>AND, OR, NOT </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.IOS_PREDICATE, <span class="string">'visible == true AND label == "登录"'</span>)</div></pre></td></tr></table></figure>
+<h5 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h5><p>BEGINSWITH, CONTAINS, ENDSWITH, LIKE, MATCHES （MATCHES 根据 <a href="http://userguide.icu-project.org/strings/regexp" target="_blank" rel="external">ICUv3 的正则表达式</a>进行匹配）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.IOS_PREDICATE, <span class="string">'name CONTAINS "Login"'</span>)</div></pre></td></tr></table></figure>
+<h4 id="ios-class-chain"><a href="#ios-class-chain" class="headerlink" title="ios class chain"></a>ios class chain</h4><p>限 iOS 9.3 及以上</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(<span class="string">'-ios class chain'</span>, <span class="string">'XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeButton[1]'</span>)</div></pre></td></tr></table></figure>
+<h4 id="ios-uiautomation"><a href="#ios-uiautomation" class="headerlink" title="ios uiautomation"></a>ios uiautomation</h4><p>限 iOS 9.3 及以下</p>
+<h4 id="android-uiautomator"><a href="#android-uiautomator" class="headerlink" title="android uiautomator"></a>android uiautomator</h4><p>限 Android</p>
+<h4 id="如何选择定位策略"><a href="#如何选择定位策略" class="headerlink" title="如何选择定位策略"></a>如何选择定位策略</h4><ul>
+<li>尽量使用 <code>accessibility id</code> 和 <code>ios predicate</code> </li>
+<li>其次使用 <code>ios class chain</code> 和 <code>ios uiautomation</code> ，因为这两个定位策略有操作系统版本限制</li>
+<li>尽量不要使用 <code>xpath</code>，尽管 xpath 不受操作系统版本限制，但是因为 iOS 并没有原生支持 xpath，是由 Appium 服务器解析整个 UI 布局来查找的，速度非常慢，比如上面的 xpath 示例耗时 4s 多，而类似的 ios class chain 示例耗时为 1.5s</li>
+</ul>
+<h4 id="如何确定设备支持的定位策略"><a href="#如何确定设备支持的定位策略" class="headerlink" title="如何确定设备支持的定位策略"></a>如何确定设备支持的定位策略</h4><p>  每次向 appium 服务器发送查找元素的请求时，服务器会有如下的日志输出，列出设备支持的所有定位策略</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[BaseDriver] Valid locator strategies for this request: xpath, id, name, class name, -ios predicate string, -ios class chain, accessibility id</div></pre></td></tr></table></figure>
+<h3 id="等待策略"><a href="#等待策略" class="headerlink" title="等待策略"></a>等待策略</h3><p>Appium 支持 WebDriver 的 2 种等待策略，在指定的等待时间中不断查找元素，直到 <code>找到元素</code> 或者 <code>超时</code></p>
+<h4 id="隐式等待"><a href="#隐式等待" class="headerlink" title="隐式等待"></a>隐式等待</h4><p>WebDriver.implicitly_wait(time_to_wait)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">driver.implicitly_wait(<span class="number">10</span>)</div><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'登录'</span>)</div><div class="line">driver.implicitly_wait(<span class="number">0</span>)</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>time_to_wait: 为 0 时表示关闭隐式等待，大于 0 时表示开启隐式等待且等待时间设为 <code>time_to_wait</code>，单位为秒；创建session 时默认为关闭隐式等待</li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li>隐式等待一旦开启，在关闭隐式等待或者结束 session 之前，调用元素查找方法的等待策略都为隐式等待</li>
+<li>如果在 time_to_wait 时间内找不到元素，抛出 <code>NoSuchElementException</code> 异常</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">driver.implicitly_wait(<span class="number">10</span>)</div><div class="line"><span class="comment"># 找不到元素</span></div><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'找不到的元素'</span>)</div><div class="line"><span class="comment"># 抛出的异常</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">……省略……</span></div><div class="line"><span class="string">selenium.common.exceptions.NoSuchElementException: Message: An element could not be located on the page using the given search parameters.</span></div><div class="line"><span class="string">"""</span></div></pre></td></tr></table></figure>
+<h4 id="显式等待"><a href="#显式等待" class="headerlink" title="显式等待"></a>显式等待</h4><ul>
+<li><p>反复调用 method 方法，直到该方法返回值为 <code>True</code></p>
+<p>WebDriverWait(driver, timeout, poll_frequency, ignored_exceptions).until(method, message)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> selenium.webdriver.support.wait <span class="keyword">import</span> WebDriverWait</div><div class="line"><span class="comment"># 返回找到的元素</span></div><div class="line">element = WebDriverWait(driver, <span class="number">5</span>, <span class="number">1</span>).until(<span class="keyword">lambda</span> x: x.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'登录'</span>))</div></pre></td></tr></table></figure>
+</li>
+<li><p>反复调用 method 方法，直到该方法返回值为 <code>False</code></p>
+<p>WebDriverWait(driver, timeout, poll_frequency, ignored_exceptions).until_not(method, message)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> selenium.webdriver.support.wait <span class="keyword">import</span> WebDriverWait</div><div class="line"><span class="comment"># 返回 True</span></div><div class="line">not_found = WebDriverWait(driver, <span class="number">5</span>, <span class="number">1</span>).until_not(<span class="keyword">lambda</span> x: x.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'找不到的元素'</span>))</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>driver: WebDriver 对象，作为 method 方法的第一个参数</li>
+<li>timeout: 超时时间</li>
+<li>poll_frequency: 执行间隔，默认为 0.5 秒</li>
+<li>ignored_exceptions: 执行方法时忽略的异常，可以有多个，默认为 NoSuchElementException</li>
+<li>method: 执行的方法</li>
+<li>message: 抛出 <code>TimeoutException</code> 时附带的信息，默认为空字符串</li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li>在 timeout 时间内，每隔 poll_frequency 秒调用一次 method 方法，直到超时或者 method 方法的返回值为 <code>True / False</code></li>
+<li>返回值为 method 方法的返回值</li>
+<li>在调用 method 方法的时候，如果抛出的异常在 ignored_exceptions 里则忽略并继续，否则抛出异常</li>
+<li>超时会抛出 <code>TimeoutException</code> 异常，无法用 ignored_exceptions 忽略</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> selenium.webdriver.support.wait <span class="keyword">import</span> WebDriverWait</div><div class="line"><span class="comment"># 找不到元素</span></div><div class="line">element = WebDriverWait(driver, <span class="number">5</span>).until(<span class="keyword">lambda</span> x: x.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'找不到的元素'</span>))</div><div class="line"><span class="comment"># 抛出的异常</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">……省略……</span></div><div class="line"><span class="string">selenium.common.exceptions.TimeoutException: Message: </span></div><div class="line"><span class="string">"""</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="元素操作"><a href="#元素操作" class="headerlink" title="元素操作"></a>元素操作</h2><h3 id="获取属性"><a href="#获取属性" class="headerlink" title="获取属性"></a>获取属性</h3><ul>
+<li><p>获取指定属性 <code>WebElement.get_attribute(name)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'登录'</span>)</div><div class="line">element_label = element.get_attribute(<span class="string">'label'</span>)</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>name: 属性名称，字符串</li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li>返回指定属性的值，通常为字符串类型。常用的属性有 name、value、type、label</li>
+<li>属性不存在时抛出 <code>WebDriverException</code> 异常</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>获取元素的坐标和大小 <code>WebElement.location</code>  <code>WebElement.size</code>  <code>WebElement.rect</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'登录'</span>)</div><div class="line">element_location = element.location <span class="comment"># &#123;'x': 15, 'y': 190&#125;</span></div><div class="line">element_size = element.size         <span class="comment"># &#123;'width': 17, 'height': 17&#125;</span></div><div class="line">element_rect = element.rect         <span class="comment"># &#123;'width': 17, 'height': 17, 'x': 15, 'y': 190&#125;</span></div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>返回值为字典类型</li>
+</ul>
+</li>
+<li><p>获取元素的类型和文本值 <code>WebElement.tag_name</code> 和 <code>WebElement.text</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'登录'</span>)</div><div class="line">element_tag = element.tag_name <span class="comment"># XCUIElementTypeButton</span></div><div class="line">element_text = element.text    <span class="comment"># 登录</span></div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>返回值为文本</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>获取显示状态 <code>WebElement.is_displayed()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'登录'</span>)</div><div class="line">element_is_displayed = element.is_displayed()</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>返回值为 bool 类型</li>
+</ul>
+</li>
+</ul>
+<h3 id="点击"><a href="#点击" class="headerlink" title="点击"></a>点击</h3><p> WebElement.click()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'登录'</span>)</div><div class="line">element.click()</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>返回 <code>None</code></li>
+</ul>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p> WebElement.send_keys(value)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'LoginUserName'</span>)</div><div class="line">element.send_keys(<span class="string">'758002'</span>)</div></pre></td></tr></table></figure>
+<p>【参数】</p>
+<ul>
+<li>value: 要赋给元素的值</li>
+</ul>
+<p>【说明】</p>
+<ul>
+<li>支持 <code>TextField</code> 和 <code>PickerWheel</code> 类型的 UI 元素</li>
+<li>赋值成功返回 <code>None</code></li>
+<li>TextField 元素调用 send_keys 方法时：<ul>
+<li>在原有的值后面添加新的值</li>
+<li>要求点击元素时能呼出键盘，否则会抛出 <code>WebDriverException</code> 异常</li>
+</ul>
+</li>
+<li>issue: 如果 WebDriverAgentRunner 模拟键入的速度太快可能导致 session 出现异常，解决方法是设置 desired_capabilities， 将默认为 60 的 <code>maxTypingFrequency</code> 改小为 10 至 20 </li>
+</ul>
+<h3 id="清空"><a href="#清空" class="headerlink" title="清空"></a>清空</h3><p> WebElement.clear()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'LoginUserName'</span>)</div><div class="line">element.send_keys(<span class="string">'123456'</span>)</div><div class="line">element.clear()</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>支持 <code>TextView</code> 类型</li>
+<li>要求点击元素时能呼出键盘，否则会抛出 <code>WebDriverException</code> 异常</li>
+</ul>
+<h3 id="查找元素-1"><a href="#查找元素-1" class="headerlink" title="查找元素"></a>查找元素</h3><p> WebElement.find_element(by, value)</p>
+<p> WebElement.find_elements(by, value)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">element = driver.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'TableList'</span>)</div><div class="line">sub_element = element.find_element(MobileBy.ACCESSIBILITY_ID, <span class="string">'表单-今日拜访'</span>)</div></pre></td></tr></table></figure>
+<p>【说明】</p>
+<ul>
+<li>参数和返回值与 WebDriver 同名 API 相同</li>
+<li>以 UI 元素为根节点进行查找</li>
+</ul>
+<h2 id="XCTest-手势操作"><a href="#XCTest-手势操作" class="headerlink" title="XCTest 手势操作"></a>XCTest 手势操作</h2><p>XCTest 提供了非常丰富的手势操作，这些操作都是 iOS 平台独有的。从 1.6.4-beta 版本开始的 Appium 支持 XCTest 手势操作。需要特别注意的是目前 XCTest 和 WDA 正在不断优化改变的阶段，这意味着所有 <code>mobile: *</code> 的命令可能会在没任何通知的情况下就被调整更改。</p>
+<h3 id="mobile-swipe"><a href="#mobile-swipe" class="headerlink" title="mobile: swipe"></a>mobile: swipe</h3><p>这个手势是在指定的屏幕上的控件或App的控件上执行“滑动”操作，一般是针对整个屏幕。这个方法不支持通过坐标来操作，并且仅仅是简单的模拟单个手指滑动。这个方法对于诸如相册分页、切换视图等情况可能会发挥比较大的作用。更复杂的场景可能需要用到<code>mobile:dragFromToForDuration</code>，这个方法支持传坐标（coordinates ）和滑动持续时间（duration）。</p>
+<p>【支持参数】</p>
+<ul>
+<li><em>direction</em>: ‘up’, ‘down’, ‘left’ or ‘right’. 这4个参数是固定的。</li>
+<li><em>element</em>: 需要滑动的控件ID（作为十六进制哈希字符串）。如果没有提供该参数的话，则会使用App的控件作为替代。</li>
+</ul>
+<p>【用法示例】 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.execute_script(<span class="string">'mobile: swipe'</span>, &#123;<span class="string">'direction'</span>: <span class="string">'down'</span>, <span class="string">'element'</span>: element&#125;);</div></pre></td></tr></table></figure>
+<h3 id="mobile-scroll"><a href="#mobile-scroll" class="headerlink" title="mobile: scroll"></a>mobile: scroll</h3><p>滚动元素或整个屏幕。支持不同的滚动策略。该方法提供了4个可选择滑动策略：按照顺序有“name”，“direction”，“predicateString”或“toVisible”。所有的滑动策略都是排他性的，一次滑动只能选择一个策略。你可以使用<code>mobile:scroll</code>来对表格中或者集合视图中的某个已知控件进行精确的滚动操作。然而目前有一个已知的局限问题：如果需要在父容器上执行太多的滚动手势来达到必要的子元素（其中几十个），则方法调用可能会失败。</p>
+<p>【支持参数】</p>
+<ul>
+<li><em>element</em>: 需要滚动的控件ID（作为十六进制哈希字符串）。如果没有提供该参数的话，则会使用App的控件作为替代。</li>
+<li><em>name</em>: 需要执行滚动的子控件的<code>accessibility id</code>。 将<code>predicateString</code>参数设置为<code>“name == accessibilityId”</code>可以实现相同的结果。如果<code>element</code>不是容器，则不起作用。</li>
+<li><em>direction</em>: ‘up’, ‘down’, ‘left’ or ‘right’. 该参数与<code>swipe</code>中的比，差别在于<code>scroll</code>会尝试将当前界面完全移动到下一页。（<code>page</code>一词表示单个设备屏幕中的所有内容）</li>
+<li><em>predicateString</em>: 需要被执行滚动操作的子控件的NSPredicate定位器。如果控件不是容器，则不起作用。</li>
+<li><em>toVisible</em>: 布尔类型的参数。如果设置为<code>true</code>，则表示要求滚动到父控件中的第一个可见到的子控件。如果<code>element</code>未设置，则不生效。</li>
+</ul>
+<p>【用法示例】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.execute_script(<span class="string">'mobile: scroll'</span>, &#123;<span class="string">'direction'</span>: <span class="string">'down'</span>&#125;);</div></pre></td></tr></table></figure>
+<h3 id="mobile-pinch"><a href="#mobile-pinch" class="headerlink" title="mobile: pinch"></a>mobile: pinch</h3><p>在给定的控件或应用程序控件上执行捏合手势。</p>
+<p>【支持参数】</p>
+<ul>
+<li><em>element</em>: 需要捏合的控件ID（作为十六进制哈希字符串）。如果没有提供该参数的话，则会使用App的控件作为替代。</li>
+<li><em>scale</em>: 浮动型夹点尺度。使用0和1之间的比例来“捏紧”或缩小，大于1的比例“撑开”或放大。强制参数</li>
+<li><em>velocity</em>: 每秒缩放速度（浮点值）。强制参数</li>
+</ul>
+<p>【用法示例】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.execute_script(<span class="string">'mobile: pinch'</span>, &#123;<span class="string">'scale'</span>: <span class="number">0.5</span>, <span class="string">'velocity'</span>: <span class="number">1.1</span>, <span class="string">'element'</span>: element&#125;)</div></pre></td></tr></table></figure>
+<h3 id="mobile-doubleTap"><a href="#mobile-doubleTap" class="headerlink" title="mobile: doubleTap"></a>mobile: doubleTap</h3><p>在指定控件上或屏幕上执行双击手势。</p>
+<p>【支持参数】</p>
+<ul>
+<li><em>element</em>: 需要双击的控件ID（作为十六进制哈希字符串）。如果没有提供该参数的话，则会使用App的控件作为替代。</li>
+<li><em>x</em>: 屏幕x轴坐标点，浮点型. 仅当<code>element</code>未设置时才是强制参数</li>
+<li><em>y</em>: 屏幕y轴坐标点，浮点型. 仅当<code>element</code>未设置时才是强制参数</li>
+</ul>
+<p>【用法示例】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.execute_script(<span class="string">'mobile: doubleTap'</span>, &#123;<span class="string">'element'</span>: element&#125;);</div></pre></td></tr></table></figure>
+<h3 id="mobile-touchAndHold"><a href="#mobile-touchAndHold" class="headerlink" title="mobile: touchAndHold"></a>mobile: touchAndHold</h3><p>在指定控件上或屏幕上长按的手势操作。</p>
+<p>【支持参数】</p>
+<ul>
+<li><em>element</em>: 需要长按的控件ID（作为十六进制哈希字符串）。如果没有提供该参数的话，则会使用App的控件作为替代。</li>
+<li><em>duration</em>: 长按的持续时间（秒），浮点型。强制性参数</li>
+<li><em>x</em>: 屏幕x轴坐标点，浮点型. 仅当<code>element</code>未设置时才是强制参数</li>
+<li><em>y</em>: 屏幕y轴坐标点，浮点型. 仅当<code>element</code>未设置时才是强制参数</li>
+</ul>
+<p>【用法示例】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.execute_script(<span class="string">'mobile: touchAndHold'</span>, &#123;<span class="string">'duration'</span>: <span class="number">2.0</span>, <span class="string">'element'</span>: element&#125;);</div></pre></td></tr></table></figure>
+<h3 id="mobile-twoFingerTap"><a href="#mobile-twoFingerTap" class="headerlink" title="mobile: twoFingerTap"></a>mobile: twoFingerTap</h3><p>在给定元素或应用程序元素上执行两个手指点击手势。</p>
+<p>【支持参数】</p>
+<ul>
+<li><em>element</em>: 需要两只手指操作的控件ID（作为十六进制哈希字符串）。如果没有提供该参数的话，则会使用App的控件作为替代。</li>
+</ul>
+<p>【用法示例】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.execute_script(<span class="string">'mobile: twoFingerTap'</span>, &#123;<span class="string">'element'</span>: element&#125;);</div></pre></td></tr></table></figure>
+<h3 id="mobile-tap"><a href="#mobile-tap" class="headerlink" title="mobile: tap"></a>mobile: tap</h3><p>在指定控件或屏幕上的坐标执行点击手势。</p>
+<p>【支持参数】</p>
+<ul>
+<li><em>element</em>: 控件ID（作为十六进制哈希字符串）。 如果设置 了<code>element</code>参数，则<code>x</code>、<code>y</code>代表的是以当前<code>element</code>为边界的xy轴。若未设置，则<code>x</code>,<code>y</code>代表的是以手机屏幕为边界。</li>
+<li><em>x</em>: x轴坐标，类型为float。强制参数</li>
+<li><em>y</em>: y轴坐标，类型为float。强制参数</li>
+</ul>
+<p>【用法示例】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.execute_script(<span class="string">'mobile: tap'</span>, &#123;<span class="string">'x'</span>: <span class="number">100</span>, <span class="string">'y'</span>: <span class="number">50</span>, <span class="string">'element'</span>: element&#125;);</div></pre></td></tr></table></figure>
+<h3 id="mobile-dragFromToForDuration"><a href="#mobile-dragFromToForDuration" class="headerlink" title="mobile: dragFromToForDuration"></a>mobile: dragFromToForDuration</h3><p>通过坐标点执行拖放手势。可以在控件上执行，也可以在屏幕上执行。</p>
+<p>【支持参数】</p>
+<ul>
+<li><em>element</em>: 控件ID（作为十六进制哈希字符串）。 如果设置 了<code>element</code>参数，则<code>x</code>、<code>y</code>代表的是以当前<code>element</code>为边界的xy轴。若未设置，则<code>x</code>,<code>y</code>代表的是以手机屏幕为边界。</li>
+<li><em>duration</em>: 浮点数范围[0.5,60]。表示开始拖动点之前的点击手势需要多长时间才能开始拖动。强制参数</li>
+<li><em>fromX</em>: 起始拖动点的x坐标（类型float）。强制参数</li>
+<li><em>fromY</em>: 起始拖动点的y坐标（类型float）。强制参数</li>
+<li><em>toX</em>: 结束拖曳点的x坐标（float类型）。强制参数</li>
+<li><em>toY</em>: 结束拖动点的y坐标（类型float）。强制参数</li>
+</ul>
+<p>【用法示例】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.execute_script(<span class="string">'mobile: dragFromToForDuration'</span>, &#123;<span class="string">'duration'</span>: <span class="number">1</span>, <span class="string">'fromX'</span>: <span class="number">100</span>, <span class="string">'fromY'</span>: <span class="number">100</span>, <span class="string">'toX'</span>: <span class="number">200</span>, <span class="string">'toY'</span>: <span class="number">200</span>, <span class="string">'element'</span>, element&#125;);</div></pre></td></tr></table></figure>
+<h3 id="mobile-selectPickerWheelValue"><a href="#mobile-selectPickerWheelValue" class="headerlink" title="mobile: selectPickerWheelValue"></a>mobile: selectPickerWheelValue</h3><p>选择下一个或上一个picker wheel的值。 如果这些值是动态的，那么这个方法是能起作用的。XCTest有一个BUG就是你并不能知道要选择哪一个或者当前的选择区域是否生效。</p>
+<p>【支持参数】</p>
+<ul>
+<li><em>element</em>: PickerWheel的内部元素id（作为十六进制哈希字符串）执行值选择。元素必须是XCUIElementTypePickerWheel类型。强制参数</li>
+<li><em>order</em>: <code>next</code> 选择下一个value，<code>previous</code>选择前面一个value。强制参数</li>
+<li><em>offset</em>: 区间值： [0.01, 0.5]。它定义了picker wheel的中心距离应该有多远。 通过将该值乘以实际的picker wheel高度来确定实际距离。太小的偏移值可能不会改变picker wheel的值，而过高的值可能会导致picker wheel同时切换两个或多个值。通常最优值位于范围[0.15,0.3]中。默认为0.2</li>
+</ul>
+<p>【用法示例】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.execute_script(<span class="string">'mobile: selectPickerWheelValue'</span>, &#123;<span class="string">'order'</span>: <span class="string">'next'</span>, <span class="string">'offset'</span>: <span class="number">0.15</span>, <span class="string">'element'</span>: element&#125;);</div></pre></td></tr></table></figure>
+<h3 id="mobile-alert"><a href="#mobile-alert" class="headerlink" title="mobile: alert"></a>mobile: alert</h3><p>对弹窗执行操作。</p>
+<p>【支持参数】</p>
+<ul>
+<li><em>action</em>: 支持以下操作: <code>accept</code>, <code>dismiss</code> and <code>getButtons</code>。强制参数</li>
+<li><em>buttonLabel</em>: 点击已有警报按钮的标签文本。这是一个可选参数，只能与<code>accept</code>和<code>dismiss</code> 操作相结合才有效。</li>
+</ul>
+<p>【用法示例】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">driver.execute_script(<span class="string">'mobile: alert'</span>, &#123;<span class="string">'action'</span>: <span class="string">'accept'</span>, <span class="string">'buttonLabel'</span>: <span class="string">'My Cool Alert Button'</span>&#125;);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Appium/" rel="tag"># Appium</a>
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/26/在MacOS上搭建Appium的iOS测试环境/" rel="next" title="在MacOS上搭建Appium的iOS测试环境">
+                <i class="fa fa-chevron-left"></i> 在MacOS上搭建Appium的iOS测试环境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a049823c29cf89" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Jo Tsai" />
+          <p class="site-author-name" itemprop="name">Jo Tsai</p>
+           
+              <p class="site-description motion-element" itemprop="description">This guy is lazy, nothing left.</p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JoTsaiCN" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      github
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境要求"><span class="nav-number">1.</span> <span class="nav-text">环境要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Appium-的-python-客户端库"><span class="nav-number">2.</span> <span class="nav-text">安装 Appium 的 python 客户端库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动-Appium-Server"><span class="nav-number">3.</span> <span class="nav-text">启动 Appium Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动-Session"><span class="nav-number">4.</span> <span class="nav-text">启动 Session</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指定测试应用"><span class="nav-number">4.1.</span> <span class="nav-text">指定测试应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重置策略"><span class="nav-number">4.2.</span> <span class="nav-text">重置策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建和结束-Session"><span class="nav-number">4.3.</span> <span class="nav-text">创建和结束 Session</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备操作"><span class="nav-number">5.</span> <span class="nav-text">设备操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重启-session"><span class="nav-number">5.1.</span> <span class="nav-text">重启 session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app-操作"><span class="nav-number">5.2.</span> <span class="nav-text">app 操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文操作"><span class="nav-number">5.3.</span> <span class="nav-text">上下文操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-UI-布局"><span class="nav-number">5.4.</span> <span class="nav-text">获取 UI 布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取分辨率"><span class="nav-number">5.5.</span> <span class="nav-text">获取分辨率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#屏幕截图"><span class="nav-number">5.6.</span> <span class="nav-text">屏幕截图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弹窗操作"><span class="nav-number">5.7.</span> <span class="nav-text">弹窗操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#屏幕操作"><span class="nav-number">5.8.</span> <span class="nav-text">屏幕操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行指令"><span class="nav-number">5.9.</span> <span class="nav-text">执行指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台运行"><span class="nav-number">5.10.</span> <span class="nav-text">后台运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取设备时间"><span class="nav-number">5.11.</span> <span class="nav-text">获取设备时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取本地化字符串"><span class="nav-number">5.12.</span> <span class="nav-text">获取本地化字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找元素"><span class="nav-number">6.</span> <span class="nav-text">查找元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查找单个元素"><span class="nav-number">6.1.</span> <span class="nav-text">查找单个元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找多个元素"><span class="nav-number">6.2.</span> <span class="nav-text">查找多个元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">6.3.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-number">6.4.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定位策略"><span class="nav-number">6.5.</span> <span class="nav-text">定位策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#class-name"><span class="nav-number">6.5.1.</span> <span class="nav-text">class name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xpath"><span class="nav-number">6.5.2.</span> <span class="nav-text">xpath</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#id"><span class="nav-number">6.5.3.</span> <span class="nav-text">id</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#name"><span class="nav-number">6.5.4.</span> <span class="nav-text">name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#accessibility-id"><span class="nav-number">6.5.5.</span> <span class="nav-text">accessibility id</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ios-predicate"><span class="nav-number">6.5.6.</span> <span class="nav-text">ios predicate</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#比较运算符"><span class="nav-number">6.5.6.1.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#逻辑运算"><span class="nav-number">6.5.6.2.</span> <span class="nav-text">逻辑运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串比较"><span class="nav-number">6.5.6.3.</span> <span class="nav-text">字符串比较</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ios-class-chain"><span class="nav-number">6.5.7.</span> <span class="nav-text">ios class chain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ios-uiautomation"><span class="nav-number">6.5.8.</span> <span class="nav-text">ios uiautomation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#android-uiautomator"><span class="nav-number">6.5.9.</span> <span class="nav-text">android uiautomator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何选择定位策略"><span class="nav-number">6.5.10.</span> <span class="nav-text">如何选择定位策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何确定设备支持的定位策略"><span class="nav-number">6.5.11.</span> <span class="nav-text">如何确定设备支持的定位策略</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#等待策略"><span class="nav-number">6.6.</span> <span class="nav-text">等待策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#隐式等待"><span class="nav-number">6.6.1.</span> <span class="nav-text">隐式等待</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显式等待"><span class="nav-number">6.6.2.</span> <span class="nav-text">显式等待</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元素操作"><span class="nav-number">7.</span> <span class="nav-text">元素操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取属性"><span class="nav-number">7.1.</span> <span class="nav-text">获取属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#点击"><span class="nav-number">7.2.</span> <span class="nav-text">点击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值"><span class="nav-number">7.3.</span> <span class="nav-text">赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清空"><span class="nav-number">7.4.</span> <span class="nav-text">清空</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找元素-1"><span class="nav-number">7.5.</span> <span class="nav-text">查找元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XCTest-手势操作"><span class="nav-number">8.</span> <span class="nav-text">XCTest 手势操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-swipe"><span class="nav-number">8.1.</span> <span class="nav-text">mobile: swipe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-scroll"><span class="nav-number">8.2.</span> <span class="nav-text">mobile: scroll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-pinch"><span class="nav-number">8.3.</span> <span class="nav-text">mobile: pinch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-doubleTap"><span class="nav-number">8.4.</span> <span class="nav-text">mobile: doubleTap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-touchAndHold"><span class="nav-number">8.5.</span> <span class="nav-text">mobile: touchAndHold</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-twoFingerTap"><span class="nav-number">8.6.</span> <span class="nav-text">mobile: twoFingerTap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-tap"><span class="nav-number">8.7.</span> <span class="nav-text">mobile: tap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-dragFromToForDuration"><span class="nav-number">8.8.</span> <span class="nav-text">mobile: dragFromToForDuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-selectPickerWheelValue"><span class="nav-number">8.9.</span> <span class="nav-text">mobile: selectPickerWheelValue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobile-alert"><span class="nav-number">8.10.</span> <span class="nav-text">mobile: alert</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jo Tsai</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://JoTsai.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://JoTsaiCN.github.io/2017/08/26/使用Appium测试iOS应用-Python/';
+          this.page.identifier = '2017/08/26/使用Appium测试iOS应用-Python/';
+          this.page.title = '使用Appium测试iOS应用(Python)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://JoTsai.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
