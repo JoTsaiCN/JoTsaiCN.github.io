@@ -9,7 +9,7 @@ signature: This guy is lazy, nothing left.
 description: 
 author: Jo Tsai
 language: zh-Hans
-timezone: 
+timezone: Asia/Hong_Kong
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
